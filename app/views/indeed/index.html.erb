@@ -1,0 +1,31 @@
+
+<%
+cities = []
+@cities.each do |c|
+  cities.push([c])
+end
+%>
+<div class="container" style="margin-top: 10px" >
+  <h1>I scrap indeed.fr</h1>
+  <div class="row" style="padding-top: 15px">
+    <div class="col-lg-8">
+      <%= form_tag("/get_data", method: "post", class: "form-inline") do %>
+        <div class="form-group">
+          <%= label_tag(:keyword, "Résultats pour:")%>&nbsp;&nbsp;
+          <%= select_tag(:keyword, options_for_select([["commercial"],["rh"]]), {:class => 'form-control'}) %>
+          &nbsp;&nbsp;&nbsp;
+          </div>
+        <div class="form-group">
+          <%= label_tag(:city, "Ville:") %>&nbsp;&nbsp;
+          <%= select_tag(:city, options_for_select(cities), {:class => 'form-control'}) %>
+          &nbsp;&nbsp;&nbsp;
+          </div>
+        <%= submit_tag "Télécharger version excel" , :class => 'btn btn-success' %>
+      <% end %>
+    </div>
+    <div class="col-lg-1">
+      <%= link_to "Deconnexion", destroy_user_session_path, method: :delete, :class => 'btn btn-primary' %>
+    </div>
+  </div>
+
+</div>
